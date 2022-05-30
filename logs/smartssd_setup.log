@@ -1,0 +1,940 @@
+maxime@RS3LAB:~/Documents/xilinx packages/2022.1$ sudo ./dpk.sh 
+[sudo] password for maxime: 
+Selecting previously unselected package xilinx-u2-gen3x4-xdma-gc-2-202110-1-dev.
+(Reading database ... 487800 files and directories currently installed.)
+Preparing to unpack .../xilinx-u2-gen3x4-xdma-gc-2-202110-1-dev_1-3311104_all.deb ...
+Unpacking xilinx-u2-gen3x4-xdma-gc-2-202110-1-dev (1-3311104) ...
+Setting up xilinx-u2-gen3x4-xdma-gc-2-202110-1-dev (1-3311104) ...
+Selecting previously unselected package xilinx-u2-gen3x4-xdma-gc-validate.
+(Reading database ... 487811 files and directories currently installed.)
+Preparing to unpack .../xilinx-u2-gen3x4-xdma-gc-validate_2-3311104_all.deb ...
+Unpacking xilinx-u2-gen3x4-xdma-gc-validate (2-3311104) ...
+Setting up xilinx-u2-gen3x4-xdma-gc-validate (2-3311104) ...
+Selecting previously unselected package xilinx-u2-gen3x4-xdma-gc-base.
+(Reading database ... 487822 files and directories currently installed.)
+Preparing to unpack .../xilinx-u2-gen3x4-xdma-gc-base_2-3311104_all.deb ...
+Unpacking xilinx-u2-gen3x4-xdma-gc-base (2-3311104) ...
+Setting up xilinx-u2-gen3x4-xdma-gc-base (2-3311104) ...
+Partition package installed successfully.
+Please flash card manually by running below command:
+sudo /opt/xilinx/xrt/bin/xbmgmt program --base --device <bdf>
+To find <bdf>, run this command:
+sudo /opt/xilinx/xrt/bin/xbmgmt examine
+Finished
+
+maxime@RS3LAB:~/Documents/xilinx packages/2022.1$ sudo /opt/xilinx/xrt/bin/xbmgmt examine
+System Configuration
+  OS Name              : Linux
+  Release              : 5.4.0-109-generic
+  Version              : #123-Ubuntu SMP Fri Apr 8 09:10:54 UTC 2022
+  Machine              : x86_64
+  CPU Cores            : 16
+  Memory               : 64044 MB
+  Distribution         : Ubuntu 20.04.4 LTS
+  GLIBC                : 2.31
+  Model                : OptiPlex 7090
+
+XRT
+  Version              : 2.13.466
+  Branch               : 2022.1
+  Hash                 : f5505e402c2ca1ffe45eb6d3a9399b23a0dc8776
+  Hash Date            : 2022-04-14 17:43:11
+  XOCL                 : 2.13.466, f5505e402c2ca1ffe45eb6d3a9399b23a0dc8776
+  XCLMGMT              : 2.13.466, f5505e402c2ca1ffe45eb6d3a9399b23a0dc8776
+
+Devices present
+BDF             :  Shell                            Platform UUID                         Device ID        Device Ready*  
+[0000:04:00.0]  :  xilinx_u2_gen3x4_xdma_gc_base_2  8C8DFD88-18AB-79B2-CC60-B0F443042D21  mgmt(inst=1024)  Yes            
+
+* Devices that are not ready will have reduced functionality when using XRT tools
+maxime@RS3LAB:~/Documents/xilinx packages/2022.1$ sudo /opt/xilinx/xrt/bin/xbmgmt program --base --image /opt/xilinx/firmware/u2/gen3x4-xdma-gc/base/partition.xsabin 
+
+ERROR: Device not specified.
+
+List of available devices:
+  [0000:04:00.0] : xilinx_u2_gen3x4_xdma_gc_base_2
+
+
+~/Documents/xilinx packages/2022.1$ sudo /opt/xilinx/xrt/bin/xbmgmt program -d 0000:04:00.0 --base --image /opt/xilinx/firmware/u2/gen3x4-xdma-gc/base/partition.xsabin 
+----------------------------------------------------
+Device : [0000:04:00.0]
+
+Current Configuration
+  Platform             : xilinx_u2_gen3x4_xdma_gc_base_2
+  SC Version           : 0.0.0
+  Platform ID          : 0x8c8dfd8818ab79b2
+
+
+Incoming Configuration
+  Deployment File      : partition.xsabin
+  Deployment Directory : /lib/firmware/xilinx/625b99fa75b56d8353ff2a7a999c8bbb
+  Size                 : 50,886,486 bytes
+  Timestamp            : Sat Apr 30 15:12:59 2022
+
+  Platform             : xilinx_u2_gen3x4_xdma_gc_base_2
+  SC Version           : 
+  Platform UUID        : 625B99FA-75B5-6D83-53FF-2A7A999C8BBB
+----------------------------------------------------
+Actions to perform:
+  [0000:04:00.0] : Program base (FLASH) image
+----------------------------------------------------
+Are you sure you wish to proceed? [Y/n]: y
+
+INFO: Satellite controller is not present.
+[0000:04:00.0] : Updating base (e.g., shell) flash image...
+Bitstream guard installed on both flashes @0x801000
+Persisted 32206 bytes of meta data to flash 0 @0x3ff8206
+Extracting bitstream from MCS data:
+.........
+Extracted 9245382 bytes from bitstream @0x801000
+Writing bitstream to flash 0:
+.........
+Extracting bitstream from MCS data:
+.........
+Extracted 9245382 bytes from bitstream @0x801000
+Writing bitstream to flash 1:
+.........
+Bitstream guard removed from both flashes
+INFO     : Base flash image has been programmed successfully. 
+----------------------------------------------------
+Report
+  [0000:04:00.0] : Satellite Controller (SC) is either up-to-date, fixed, or not installed. No actions taken.
+  [0000:04:00.0] : Successfully flashed the base (e.g., shell) image
+
+Device flashed successfully.
+****************************************************
+Cold reboot machine to load the new image on device.
+****************************************************
+
+
+$ source /opt/xilinx/xrt/setup.sh
+Autocomplete enabled for the xbutil command
+Autocomplete enabled for the xbmgmt command
+XILINX_XRT        : /opt/xilinx/xrt
+PATH              : /opt/xilinx/xrt/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+LD_LIBRARY_PATH   : /opt/xilinx/xrt/lib:
+PYTHONPATH        : /opt/xilinx/xrt/python:
+
+
+$ sudo lspci -vd 10ee:
+01:00.0 PCI bridge: Xilinx Corporation Device 9134 (prog-if 00 [Normal decode])
+	Flags: bus master, fast devsel, latency 0, IRQ 125
+	Bus: primary=01, secondary=02, subordinate=04, sec-latency=0
+	I/O behind bridge: 00000000-00000fff [size=4K]
+	Memory behind bridge: 70900000-709fffff [size=1M]
+	Prefetchable memory behind bridge: 0000006000000000-00000062040fffff [size=8257M]
+	Capabilities: [40] Power Management version 3
+	Capabilities: [48] MSI: Enable+ Count=1/1 Maskable- 64bit+
+	Capabilities: [70] Express Upstream Port, MSI 00
+	Capabilities: [100] Advanced Error Reporting
+	Capabilities: [1c0] Secondary PCI Express
+	Kernel driver in use: pcieport
+
+02:00.0 PCI bridge: Xilinx Corporation Device 9234 (prog-if 00 [Normal decode])
+	Flags: bus master, fast devsel, latency 0, IRQ 126
+	Bus: primary=02, secondary=03, subordinate=03, sec-latency=0
+	I/O behind bridge: 00000000-00000fff [size=4K]
+	Memory behind bridge: 70900000-709fffff [size=1M]
+	Prefetchable memory behind bridge: [disabled]
+	Capabilities: [40] Power Management version 3
+	Capabilities: [48] MSI: Enable+ Count=1/1 Maskable- 64bit+
+	Capabilities: [70] Express Downstream Port (Slot+), MSI 00
+	Capabilities: [100] Access Control Services
+	Capabilities: [1c0] Secondary PCI Express
+	Kernel driver in use: pcieport
+
+02:01.0 PCI bridge: Xilinx Corporation Device 9434 (prog-if 00 [Normal decode])
+	Flags: bus master, fast devsel, latency 0
+	Bus: primary=02, secondary=04, subordinate=04, sec-latency=0
+	I/O behind bridge: 00000000-00000fff [size=4K]
+	Memory behind bridge: [disabled]
+	Prefetchable memory behind bridge: 0000006000000000-00000062040fffff [size=8257M]
+	Capabilities: [40] Power Management version 3
+	Capabilities: [70] Express Downstream Port (Slot-), MSI 00
+	Capabilities: [100] Access Control Services
+	Capabilities: [140] Secondary PCI Express
+
+04:00.0 Processing accelerators: Xilinx Corporation Device 6987
+	Subsystem: Xilinx Corporation Device 1351
+	Flags: bus master, fast devsel, latency 0
+	Memory at 6202000000 (64-bit, prefetchable) [size=32M]
+	Memory at 6204010000 (64-bit, prefetchable) [size=64K]
+	Capabilities: [40] Power Management version 3
+	Capabilities: [60] MSI-X: Enable- Count=33 Masked-
+	Capabilities: [70] Express Endpoint, MSI 00
+	Capabilities: [100] Advanced Error Reporting
+	Capabilities: [140] Secondary PCI Express
+	Capabilities: [180] Vendor Specific Information: ID=0040 Rev=0 Len=018 <?>
+	Capabilities: [400] Access Control Services
+	Capabilities: [480] Vendor Specific Information: ID=0020 Rev=0 Len=010 <?>
+	Kernel driver in use: xclmgmt
+	Kernel modules: xclmgmt
+
+04:00.1 Processing accelerators: Xilinx Corporation Device 6988
+	Subsystem: Xilinx Corporation Device 1351
+	Flags: fast devsel
+	Memory at 6200000000 (64-bit, prefetchable) [size=32M]
+	Memory at 6204000000 (64-bit, prefetchable) [size=64K]
+	Memory at 6000000000 (64-bit, prefetchable) [size=8G]
+	Capabilities: [40] Power Management version 3
+	Capabilities: [60] MSI-X: Enable- Count=32 Masked-
+	Capabilities: [70] Express Endpoint, MSI 00
+	Capabilities: [100] Advanced Error Reporting
+	Capabilities: [400] Access Control Services
+	Capabilities: [480] Vendor Specific Information: ID=0020 Rev=0 Len=010 <?>
+	Kernel driver in use: xocl
+	Kernel modules: xocl
+
+$ sudo lspci -vs 03:00.0
+[sudo] password for maxime: 
+03:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd Device a825 (prog-if 02 [NVM Express])
+	Subsystem: Samsung Electronics Co Ltd Device a815
+	Flags: bus master, fast devsel, latency 0, IRQ 16, NUMA node 0
+	Memory at 70900000 (64-bit, non-prefetchable) [size=32K]
+	Expansion ROM at 70910000 [disabled] [size=64K]
+	Capabilities: [40] Power Management version 3
+	Capabilities: [50] MSI: Enable- Count=1/32 Maskable- 64bit+
+	Capabilities: [70] Express Endpoint, MSI 00
+	Capabilities: [b0] MSI-X: Enable+ Count=64 Masked-
+	Capabilities: [100] Advanced Error Reporting
+	Capabilities: [148] Device Serial Number 39-2e-50-11-96-38-25-00
+	Capabilities: [178] Secondary PCI Express
+	Kernel driver in use: nvme
+	Kernel modules: nvme
+
+maxime@RS3LAB:~$ lsblk
+NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+loop0         7:0    0     4K  1 loop /snap/bare/5
+loop1         7:1    0  55.5M  1 loop /snap/core18/2253
+loop2         7:2    0  61.9M  1 loop /snap/core20/1405
+loop3         7:3    0  55.5M  1 loop /snap/core18/2344
+loop4         7:4    0   219M  1 loop /snap/gnome-3-34-1804/72
+loop5         7:5    0   219M  1 loop /snap/gnome-3-34-1804/77
+loop6         7:6    0  61.9M  1 loop /snap/core20/1434
+loop7         7:7    0    51M  1 loop /snap/snap-store/547
+loop8         7:8    0  54.2M  1 loop /snap/snap-store/558
+loop9         7:9    0  65.2M  1 loop /snap/gtk-common-themes/1519
+loop10        7:10   0  62.1M  1 loop /snap/gtk-common-themes/1506
+loop11        7:11   0 248.8M  1 loop /snap/gnome-3-38-2004/99
+loop12        7:12   0 247.9M  1 loop /snap/gnome-3-38-2004/87
+loop13        7:13   0  43.6M  1 loop /snap/snapd/15177
+loop14        7:14   0  44.7M  1 loop /snap/snapd/15534
+nvme0n1     259:1    0   3.5T  0 disk 
+nvme1n1     259:2    0 953.9G  0 disk 
+├─nvme1n1p1 259:3    0   100M  0 part /boot/efi
+├─nvme1n1p2 259:4    0    16M  0 part 
+├─nvme1n1p3 259:5    0 487.6G  0 part 
+├─nvme1n1p4 259:6    0   508M  0 part 
+└─nvme1n1p5 259:7    0 465.7G  0 part /
+
+
+#### FIO #####
+
+# Random-Write command :
+$ sudo fio --name=rand-write --ioengine=libaio --iodepth=256 --rw=randwrite --bs=4k --direct=1 --size=100% --numjobs=12 --runtime=60 --filename=/dev/nvme0n1 --group_reporting=1
+rand-write: (g=0): rw=randwrite, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=libaio, iodepth=256
+...
+fio-3.16
+Starting 12 processes
+Jobs: 12 (f=12): [w(12)][100.0%][w=2627MiB/s][w=673k IOPS][eta 00m:00s]
+rand-write: (groupid=0, jobs=12): err= 0: pid=5354: Sat Apr 30 15:38:48 2022
+  write: IOPS=683k, BW=2667MiB/s (2796MB/s)(156GiB/60005msec); 0 zone resets
+    slat (nsec): min=1085, max=1593.6k, avg=1823.24, stdev=1798.94
+    clat (usec): min=97, max=21180, avg=4494.97, stdev=1224.05
+     lat (usec): min=102, max=21182, avg=4496.88, stdev=1224.07
+    clat percentiles (usec):
+     |  1.00th=[  725],  5.00th=[ 2114], 10.00th=[ 3359], 20.00th=[ 4228],
+     | 30.00th=[ 4359], 40.00th=[ 4424], 50.00th=[ 4555], 60.00th=[ 4686],
+     | 70.00th=[ 4752], 80.00th=[ 4948], 90.00th=[ 5276], 95.00th=[ 5866],
+     | 99.00th=[ 8848], 99.50th=[10159], 99.90th=[13435], 99.95th=[14353],
+     | 99.99th=[16319]
+   bw (  MiB/s): min= 2367, max= 2915, per=99.99%, avg=2666.54, stdev= 8.25, samples=1440
+   iops        : min=605974, max=746318, avg=682633.54, stdev=2111.68, samples=1440
+  lat (usec)   : 100=0.01%, 250=0.10%, 500=0.47%, 750=0.48%, 1000=0.56%
+  lat (msec)   : 2=3.04%, 4=9.77%, 10=85.05%, 20=0.54%, 50=0.01%
+  cpu          : usr=7.35%, sys=12.95%, ctx=6186798, majf=0, minf=129
+  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.1%, 32=0.1%, >=64=100.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.1%
+     issued rwts: total=0,40964781,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=256
+
+Run status group 0 (all jobs):
+  WRITE: bw=2667MiB/s (2796MB/s), 2667MiB/s-2667MiB/s (2796MB/s-2796MB/s), io=156GiB (168GB), run=60005-60005msec
+
+Disk stats (read/write):
+  nvme0n1: ios=0/0, merge=0/0, ticks=0/0, in_queue=0, util=0.00%
+
+
+# Random-Read command :
+$ sudo fio --name=rand-read --ioengine=libaio --iodepth=256 --rw=randread --bs=4k --direct=1 --size=100% --numjobs=12 --runtime=60 --filename=/dev/nvme0n1 --group_reporting=1
+rand-read: (g=0): rw=randread, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=libaio, iodepth=256
+...
+fio-3.16
+Starting 12 processes
+Jobs: 12 (f=12): [r(12)][100.0%][r=1904MiB/s][r=487k IOPS][eta 00m:00s]
+rand-read: (groupid=0, jobs=12): err= 0: pid=5449: Sat Apr 30 15:41:54 2022
+  read: IOPS=766k, BW=2991MiB/s (3136MB/s)(175GiB/60007msec)
+    slat (nsec): min=1057, max=3124.6k, avg=1794.59, stdev=1410.39
+    clat (usec): min=100, max=49107, avg=4007.99, stdev=1385.28
+     lat (usec): min=104, max=49108, avg=4009.88, stdev=1385.25
+    clat percentiles (usec):
+     |  1.00th=[  807],  5.00th=[ 1713], 10.00th=[ 2540], 20.00th=[ 3261],
+     | 30.00th=[ 3458], 40.00th=[ 3621], 50.00th=[ 3818], 60.00th=[ 4015],
+     | 70.00th=[ 4293], 80.00th=[ 4752], 90.00th=[ 6194], 95.00th=[ 6652],
+     | 99.00th=[ 7898], 99.50th=[ 8717], 99.90th=[10945], 99.95th=[11731],
+     | 99.99th=[13173]
+   bw (  MiB/s): min= 1822, max= 3405, per=100.00%, avg=2990.45, stdev=40.59, samples=1440
+   iops        : min=466639, max=871898, avg=765554.53, stdev=10390.87, samples=1440
+  lat (usec)   : 250=0.01%, 500=0.19%, 750=0.63%, 1000=0.88%
+  lat (msec)   : 2=4.95%, 4=52.50%, 10=40.65%, 20=0.20%, 50=0.01%
+  cpu          : usr=9.29%, sys=18.40%, ctx=29547884, majf=0, minf=3224
+  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.1%, 32=0.1%, >=64=100.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.1%
+     issued rwts: total=45939967,0,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=256
+
+Run status group 0 (all jobs):
+   READ: bw=2991MiB/s (3136MB/s), 2991MiB/s-2991MiB/s (3136MB/s-3136MB/s), io=175GiB (188GB), run=60007-60007msec
+
+Disk stats (read/write):
+  nvme0n1: ios=0/0, merge=0/0, ticks=0/0, in_queue=0, util=0.00%
+
+
+
+# Seq-Write command :
+$ sudo fio --name=seq-write --ioengine=libaio --iodepth=64 --rw=write --bs=1024k --direct=1 --size=100% --numjobs=12 --runtime=60 --filename=/dev/nvme0n1 --group_reporting=1
+seq-write: (g=0): rw=write, bs=(R) 1024KiB-1024KiB, (W) 1024KiB-1024KiB, (T) 1024KiB-1024KiB, ioengine=libaio, iodepth=64
+...
+fio-3.16
+Starting 12 processes
+Jobs: 12 (f=12): [W(12)][100.0%][w=1453MiB/s][w=1453 IOPS][eta 00m:00s]
+seq-write: (groupid=0, jobs=12): err= 0: pid=5551: Sat Apr 30 15:46:07 2022
+  write: IOPS=1725, BW=1725MiB/s (1809MB/s)(102GiB/60386msec); 0 zone resets
+    slat (usec): min=37, max=526294, avg=6056.06, stdev=16254.21
+    clat (msec): min=8, max=1713, avg=438.94, stdev=288.15
+     lat (msec): min=8, max=1716, avg=445.00, stdev=291.19
+    clat percentiles (msec):
+     |  1.00th=[   39],  5.00th=[   73], 10.00th=[  111], 20.00th=[  169],
+     | 30.00th=[  236], 40.00th=[  288], 50.00th=[  355], 60.00th=[  447],
+     | 70.00th=[  625], 80.00th=[  768], 90.00th=[  869], 95.00th=[  927],
+     | 99.00th=[ 1045], 99.50th=[ 1083], 99.90th=[ 1284], 99.95th=[ 1435],
+     | 99.99th=[ 1586]
+   bw (  MiB/s): min=  126, max= 4189, per=99.89%, avg=1723.36, stdev=84.85, samples=1440
+   iops        : min=  126, max= 4189, avg=1722.93, stdev=84.86, samples=1440
+  lat (msec)   : 10=0.03%, 20=0.05%, 50=2.25%, 100=6.05%, 250=24.67%
+  lat (msec)   : 500=30.57%, 750=14.62%, 1000=19.91%, 2000=1.86%
+  cpu          : usr=1.00%, sys=0.71%, ctx=82666, majf=0, minf=131
+  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.2%, 32=0.4%, >=64=99.3%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.1%, >=64=0.0%
+     issued rwts: total=0,104181,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=64
+
+Run status group 0 (all jobs):
+  WRITE: bw=1725MiB/s (1809MB/s), 1725MiB/s-1725MiB/s (1809MB/s-1809MB/s), io=102GiB (109GB), run=60386-60386msec
+
+Disk stats (read/write):
+  nvme0n1: ios=0/0, merge=0/0, ticks=0/0, in_queue=0, util=0.00%
+
+
+# Seq-Read command :
+$ sudo fio --name=seq-read --ioengine=libaio --iodepth=64 --rw=read --bs=1024k --direct=1 --size=100% --numjobs=12 --runtime=60 --filename=/dev/nvme0n1 --group_reporting=1
+seq-read: (g=0): rw=read, bs=(R) 1024KiB-1024KiB, (W) 1024KiB-1024KiB, (T) 1024KiB-1024KiB, ioengine=libaio, iodepth=64
+...
+fio-3.16
+Starting 12 processes
+Jobs: 12 (f=12): [R(12)][100.0%][r=1951MiB/s][r=1951 IOPS][eta 00m:00s]
+seq-read: (groupid=0, jobs=12): err= 0: pid=5641: Sat Apr 30 15:48:39 2022
+  read: IOPS=2704, BW=2704MiB/s (2835MB/s)(159GiB/60345msec)
+    slat (usec): min=19, max=55897, avg=2919.92, stdev=4625.06
+    clat (msec): min=28, max=1379, avg=280.75, stdev=171.22
+     lat (msec): min=28, max=1396, avg=283.67, stdev=173.39
+    clat percentiles (msec):
+     |  1.00th=[   37],  5.00th=[   59], 10.00th=[   83], 20.00th=[  133],
+     | 30.00th=[  178], 40.00th=[  220], 50.00th=[  257], 60.00th=[  292],
+     | 70.00th=[  334], 80.00th=[  397], 90.00th=[  510], 95.00th=[  617],
+     | 99.00th=[  827], 99.50th=[  919], 99.90th=[ 1070], 99.95th=[ 1116],
+     | 99.99th=[ 1284]
+   bw (  MiB/s): min=  688, max= 6305, per=100.00%, avg=2706.52, stdev=97.00, samples=1440
+   iops        : min=  688, max= 6305, avg=2706.10, stdev=97.02, samples=1440
+  lat (msec)   : 50=3.07%, 100=10.28%, 250=34.69%, 500=41.41%, 750=8.77%
+  lat (msec)   : 1000=1.55%, 2000=0.23%
+  cpu          : usr=0.07%, sys=0.96%, ctx=148473, majf=0, minf=196730
+  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.1%, 32=0.2%, >=64=99.5%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.1%, >=64=0.0%
+     issued rwts: total=163175,0,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=64
+
+Run status group 0 (all jobs):
+   READ: bw=2704MiB/s (2835MB/s), 2704MiB/s-2704MiB/s (2835MB/s-2835MB/s), io=159GiB (171GB), run=60345-60345msec
+
+Disk stats (read/write):
+  nvme0n1: ios=0/0, merge=0/0, ticks=0/0, in_queue=0, util=0.00%
+
+
+
+# Dev temp after running FIO
+$ sudo nvme smart-log /dev/nvme0n1
+Smart Log for NVME device:nvme0n1 namespace-id:ffffffff
+critical_warning                    : 0
+temperature                         : 71 C
+available_spare                     : 100%
+available_spare_threshold           : 10%
+percentage_used                     : 0%
+data_units_read                     : 701’858
+data_units_written                  : 541’082
+host_read_commands                  : 47’249’088
+host_write_commands                 : 41’798’231
+controller_busy_time                : 0
+power_cycles                        : 62
+power_on_hours                      : 197
+unsafe_shutdowns                    : 24
+media_errors                        : 0
+num_err_log_entries                 : 0
+Warning Temperature Time            : 16
+Critical Composite Temperature Time : 106
+Temperature Sensor 1                : 61 C
+Temperature Sensor 2                : 66 C
+Temperature Sensor 3                : 71 C
+Thermal Management T1 Trans Count   : 0
+Thermal Management T2 Trans Count   : 0
+Thermal Management T1 Total Time    : 0
+Thermal Management T2 Total Time    : 0
+
+
+
+# Running xbmgmt flash --scan
+$ xbmgmt examine --device 0000:04:00.0 --report platform
+
+-------------------------------
+1/1 [0000:04:00.0] : xilinx_u2
+-------------------------------
+Warning: Device is not ready - Limited functionality available with XRT tools.
+
+Flash properties
+  Type                 : spi
+  Serial Number        : N/A
+
+Device properties
+  Type                 : N/A
+  Name                 : N/A
+  Config Mode          : 0xab5bd0d0
+
+Flashable partitions running on FPGA
+  Platform             : xilinx_u2
+  SC Version           : INACTIVE
+  Platform ID          : 0x0
+
+Flashable partitions installed in system
+  Platform             : xilinx_u2_gen3x4_xdma_gc_base_2
+  SC Version           : N/A
+  Platform UUID        : 625B99FA-75B5-6D83-53FF-2A7A999C8BBB
+
+WARNING  : Device is not up-to-date.
+
+
+$ sudo /opt/xilinx/xrt/bin/xbmgmt program -d 0000:04:00.0 --base --image /opt/xilinx/firmware/u2/gen3x4-xdma-gc/base/partition.xsabin
+----------------------------------------------------
+Device : [0000:04:00.0]
+
+Current Configuration
+  Platform             : xilinx_u2
+  SC Version           : INACTIVE
+  Platform ID          : 0x0
+
+
+Incoming Configuration
+  Deployment File      : partition.xsabin
+  Deployment Directory : /lib/firmware/xilinx/625b99fa75b56d8353ff2a7a999c8bbb
+  Size                 : 50,886,486 bytes
+  Timestamp            : Sat Apr 30 15:12:59 2022
+
+  Platform             : xilinx_u2_gen3x4_xdma_gc_base_2
+  SC Version           : 
+  Platform UUID        : 625B99FA-75B5-6D83-53FF-2A7A999C8BBB
+----------------------------------------------------
+Actions to perform:
+  [0000:04:00.0] : Program base (FLASH) image
+----------------------------------------------------
+Are you sure you wish to proceed? [Y/n]: y
+
+INFO: Satellite controller is not present.
+[0000:04:00.0] : Updating base (e.g., shell) flash image...
+Bitstream guard installed on both flashes @0x801000
+Persisted 32206 bytes of meta data to flash 0 @0x3ff8206
+Extracting bitstream from MCS data:
+.........
+Extracted 9245382 bytes from bitstream @0x801000
+Writing bitstream to flash 0:
+.........
+Extracting bitstream from MCS data:
+.........
+Extracted 9245382 bytes from bitstream @0x801000
+Writing bitstream to flash 1:
+.........
+Bitstream guard removed from both flashes
+INFO     : Base flash image has been programmed successfully. 
+----------------------------------------------------
+Report
+  [0000:04:00.0] : Satellite Controller (SC) is either up-to-date, fixed, or not installed. No actions taken.
+  [0000:04:00.0] : Successfully flashed the base (e.g., shell) image
+
+Device flashed successfully.
+****************************************************
+Cold reboot machine to load the new image on device.
+****************************************************
+
+$ sudo /opt/xilinx/xrt/bin/xbmgmt examine --device 0000:04:00.0 --report platform
+
+-----------------------------------------------------
+1/1 [0000:04:00.0] : xilinx_u2_gen3x4_xdma_gc_base_2
+-----------------------------------------------------
+Flash properties
+  Type                 : spi
+  Serial Number        : N/A
+
+Device properties
+  Type                 : N/A
+  Name                 : N/A
+  Config Mode          : 0xf0669760
+
+Flashable partitions running on FPGA
+  Platform             : xilinx_u2_gen3x4_xdma_gc_base_2
+  SC Version           : 0.0.0
+  Platform UUID        : 625B99FA-75B5-6D83-53FF-2A7A999C8BBB
+  Interface UUID       : CF21A4FC-8A72-02D8-0393-D25A2C6BE95F
+
+Flashable partitions installed in system
+  Platform             : xilinx_u2_gen3x4_xdma_gc_base_2
+  SC Version           : N/A
+  Platform UUID        : 625B99FA-75B5-6D83-53FF-2A7A999C8BBB
+
+
+$ sudo nvme smart-log /dev/nvme0n1
+Smart Log for NVME device:nvme0n1 namespace-id:ffffffff
+critical_warning                    : 0
+temperature                         : 68 C
+available_spare                     : 100%
+available_spare_threshold           : 10%
+percentage_used                     : 0%
+data_units_read                     : 701’863
+data_units_written                  : 541’082
+host_read_commands                  : 47’249’191
+host_write_commands                 : 41’798’231
+controller_busy_time                : 0
+power_cycles                        : 63
+power_on_hours                      : 198
+unsafe_shutdowns                    : 24
+media_errors                        : 0
+num_err_log_entries                 : 0
+Warning Temperature Time            : 16
+Critical Composite Temperature Time : 106
+Temperature Sensor 1                : 58 C
+Temperature Sensor 2                : 63 C
+Temperature Sensor 3                : 68 C
+Thermal Management T1 Trans Count   : 0
+Thermal Management T2 Trans Count   : 0
+Thermal Management T1 Total Time    : 0
+Thermal Management T2 Total Time    : 0
+
+#### Running xbutil validate ####
+
+$ sudo /opt/xilinx/xrt/bin/xbutil validate -d 0000:04:00.0
+ERROR: Specified device BDF '0000:04:00.0' not found
+ Available devices:
+  [0000:04:00.1] : xilinx_u2_gen3x4_xdma_gc_base_2
+
+
+
+$ sudo /opt/xilinx/xrt/bin/xbutil validate -d 0000:04:00.1
+Starting validation for 1 devices
+
+Validate Device           : [0000:04:00.1]
+    Platform              : xilinx_u2_gen3x4_xdma_gc_base_2
+    SC Version            : 0.0.0
+    Platform ID           : 625B99FA-75B5-6D83-53FF-2A7A999C8BBB
+-------------------------------------------------------------------------------
+Test 1 [0000:04:00.1]     : pcie-link 
+    Test Status           : [PASSED]
+-------------------------------------------------------------------------------
+Test 2 [0000:04:00.1]     : sc-version 
+    Test Status           : [PASSED]
+-------------------------------------------------------------------------------
+Test 3 [0000:04:00.1]     : verify 
+    Test Status           : [PASSED]
+-------------------------------------------------------------------------------
+Test 4 [0000:04:00.1]     : dma 
+    Details               : Buffer size - '16 MB'
+                            Host -> PCIe -> FPGA write bandwidth = 3326.9 MB/s
+                            Host <- PCIe <- FPGA read bandwidth = 3286.4 MB/s
+    Test Status           : [PASSED]
+-------------------------------------------------------------------------------
+Test 5 [0000:04:00.1]     : iops 
+    Details               : IOPS: 148355 (hello)
+    Test Status           : [PASSED]
+-------------------------------------------------------------------------------
+Test 6 [0000:04:00.1]     : mem-bw 
+    Details               : Maximum throughput: 14139 MB/s
+    Test Status           : [PASSED]
+-------------------------------------------------------------------------------
+[PASSED] :  < 7s >
+Test 7 [0000:04:00.1]     : p2p 
+    Details               : bank0 validated
+    Test Status           : [PASSED]
+-------------------------------------------------------------------------------
+Test 8 [0000:04:00.1]     : vcu 
+
+
+$ sudo nvme smart-log /dev/nvme0n1
+Smart Log for NVME device:nvme0n1 namespace-id:ffffffff
+critical_warning                    : 0x2
+temperature                         : 75 C
+available_spare                     : 100%
+available_spare_threshold           : 10%
+percentage_used                     : 0%
+data_units_read                     : 701’863
+data_units_written                  : 541’082
+host_read_commands                  : 47’249’191
+host_write_commands                 : 41’798’231
+controller_busy_time                : 0
+power_cycles                        : 63
+power_on_hours                      : 198
+unsafe_shutdowns                    : 24
+media_errors                        : 0
+num_err_log_entries                 : 0
+Warning Temperature Time            : 16
+Critical Composite Temperature Time : 106
+Temperature Sensor 1                : 60 C
+Temperature Sensor 2                : 66 C
+Temperature Sensor 3                : 75 C
+Thermal Management T1 Trans Count   : 0
+Thermal Management T2 Trans Count   : 0
+Thermal Management T1 Total Time    : 0
+Thermal Management T2 Total Time    : 0
+
+
+
+#### Running Byte Copy Test Kernel ####
+# --> need to build xclbin in ~/Documents/Vitis_Accel_Examples-master/host/p2p_bandwidth
+
+
+
+$ sudo ./installLibs.sh 
+[sudo] password for maxime: 
+touch: cannot touch '/root/.Xilinx/xinstall/installLibs.sh_2022-05-03_16-28-24': Permission denied
+chmod: cannot access '/root/.Xilinx/xinstall/installLibs.sh_2022-05-03_16-28-24': Permission denied
+No LSB modules are available.
+ubuntu-20 install
+Hit:1 http://ubuntu.ethz.ch/ubuntu focal InRelease
+Hit:2 http://ubuntu.ethz.ch/ubuntu focal-updates InRelease
+Hit:3 http://ubuntu.ethz.ch/ubuntu focal-backports InRelease
+Hit:4 http://ubuntu.ethz.ch/ubuntu focal-security InRelease
+Hit:5 http://archive.canonical.com/ubuntu focal InRelease
+Hit:6 http://dl.google.com/linux/chrome/deb stable InRelease
+Hit:7 http://ppa.launchpad.net/cappelikan/ppa/ubuntu focal InRelease
+Hit:8 http://dell.archive.canonical.com focal InRelease
+Hit:9 https://packagecloud.io/slacktechnologies/slack/debian jessie InRelease
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+net-tools is already the newest version (1.60+git20180626.aebd88e-1ubuntu1).
+The following additional packages will be installed:
+  gcc-9-multilib gcc-multilib lib32asan5 lib32atomic1 lib32gcc-9-dev
+  lib32gcc-s1 lib32gomp1 lib32itm1 lib32quadmath0 lib32stdc++6 lib32ubsan1
+  libc6-dev-x32 libc6-i386 libc6-x32 libx32asan5 libx32atomic1 libx32gcc-9-dev
+  libx32gcc-s1 libx32gomp1 libx32itm1 libx32quadmath0 libx32stdc++6
+  libx32ubsan1
+The following NEW packages will be installed:
+  gcc-9-multilib gcc-multilib lib32asan5 lib32atomic1 lib32gcc-9-dev
+  lib32gcc-s1 lib32gomp1 lib32itm1 lib32quadmath0 lib32stdc++6 lib32ubsan1
+  libc6-dev-i386 libc6-dev-x32 libc6-i386 libc6-x32 libx32asan5 libx32atomic1
+  libx32gcc-9-dev libx32gcc-s1 libx32gomp1 libx32itm1 libx32quadmath0
+  libx32stdc++6 libx32ubsan1
+0 upgraded, 24 newly installed, 0 to remove and 0 not upgraded.
+Need to get 22.1 MB of archives.
+After this operation, 105 MB of additional disk space will be used.
+Get:1 http://ubuntu.ethz.ch/ubuntu focal-updates/main amd64 libc6-i386 amd64 2.31-0ubuntu9.7 [2’725 kB]
+Get:2 http://ubuntu.ethz.ch/ubuntu focal-updates/main amd64 libc6-dev-i386 amd64 2.31-0ubuntu9.7 [1’903 kB]
+Get:3 http://ubuntu.ethz.ch/ubuntu focal-updates/main amd64 libc6-x32 amd64 2.31-0ubuntu9.7 [2’779 kB]
+Get:4 http://ubuntu.ethz.ch/ubuntu focal-updates/main amd64 libc6-dev-x32 amd64 2.31-0ubuntu9.7 [1’975 kB]
+Get:5 http://ubuntu.ethz.ch/ubuntu focal-updates/main amd64 lib32gcc-s1 amd64 10.3.0-1ubuntu1~20.04 [49.2 kB]
+Get:6 http://ubuntu.ethz.ch/ubuntu focal-updates/main amd64 libx32gcc-s1 amd64 10.3.0-1ubuntu1~20.04 [41.6 kB]
+Get:7 http://ubuntu.ethz.ch/ubuntu focal-updates/main amd64 lib32gomp1 amd64 10.3.0-1ubuntu1~20.04 [108 kB]
+Get:8 http://ubuntu.ethz.ch/ubuntu focal-updates/main amd64 libx32gomp1 amd64 10.3.0-1ubuntu1~20.04 [102 kB]
+Get:9 http://ubuntu.ethz.ch/ubuntu focal-updates/main amd64 lib32itm1 amd64 10.3.0-1ubuntu1~20.04 [28.3 kB]
+Get:10 http://ubuntu.ethz.ch/ubuntu focal-updates/main amd64 libx32itm1 amd64 10.3.0-1ubuntu1~20.04 [26.5 kB]
+Get:11 http://ubuntu.ethz.ch/ubuntu focal-updates/main amd64 lib32atomic1 amd64 10.3.0-1ubuntu1~20.04 [8’860 B]
+Get:12 http://ubuntu.ethz.ch/ubuntu focal-updates/main amd64 libx32atomic1 amd64 10.3.0-1ubuntu1~20.04 [9’284 B]
+Get:13 http://ubuntu.ethz.ch/ubuntu focal-updates/main amd64 lib32asan5 amd64 9.4.0-1ubuntu1~20.04.1 [2’648 kB]
+Get:14 http://ubuntu.ethz.ch/ubuntu focal-updates/main amd64 libx32asan5 amd64 9.4.0-1ubuntu1~20.04.1 [2’587 kB]
+Get:15 http://ubuntu.ethz.ch/ubuntu focal-updates/main amd64 lib32stdc++6 amd64 10.3.0-1ubuntu1~20.04 [525 kB]
+Get:16 http://ubuntu.ethz.ch/ubuntu focal-updates/main amd64 lib32ubsan1 amd64 10.3.0-1ubuntu1~20.04 [756 kB]
+Get:17 http://ubuntu.ethz.ch/ubuntu focal-updates/main amd64 libx32stdc++6 amd64 10.3.0-1ubuntu1~20.04 [486 kB]
+Get:18 http://ubuntu.ethz.ch/ubuntu focal-updates/main amd64 libx32ubsan1 amd64 10.3.0-1ubuntu1~20.04 [762 kB]
+Get:19 http://ubuntu.ethz.ch/ubuntu focal-updates/main amd64 lib32quadmath0 amd64 10.3.0-1ubuntu1~20.04 [230 kB]
+Get:20 http://ubuntu.ethz.ch/ubuntu focal-updates/main amd64 libx32quadmath0 amd64 10.3.0-1ubuntu1~20.04 [149 kB]
+Get:21 http://ubuntu.ethz.ch/ubuntu focal-updates/main amd64 lib32gcc-9-dev amd64 9.4.0-1ubuntu1~20.04.1 [2’224 kB]
+Get:22 http://ubuntu.ethz.ch/ubuntu focal-updates/main amd64 libx32gcc-9-dev amd64 9.4.0-1ubuntu1~20.04.1 [2’013 kB]
+Get:23 http://ubuntu.ethz.ch/ubuntu focal-updates/main amd64 gcc-9-multilib amd64 9.4.0-1ubuntu1~20.04.1 [1’072 B]
+Get:24 http://ubuntu.ethz.ch/ubuntu focal/main amd64 gcc-multilib amd64 4:9.3.0-1ubuntu2 [1’516 B]
+Fetched 22.1 MB in 2s (11.6 MB/s)
+                                 Selecting previously unselected package libc6-i386.
+(Reading database ... 488071 files and directories currently installed.)
+Preparing to unpack .../00-libc6-i386_2.31-0ubuntu9.7_amd64.deb ...
+Unpacking libc6-i386 (2.31-0ubuntu9.7) ...
+Selecting previously unselected package libc6-dev-i386.
+Preparing to unpack .../01-libc6-dev-i386_2.31-0ubuntu9.7_amd64.deb ...
+Unpacking libc6-dev-i386 (2.31-0ubuntu9.7) ...
+Selecting previously unselected package libc6-x32.
+Preparing to unpack .../02-libc6-x32_2.31-0ubuntu9.7_amd64.deb ...
+Unpacking libc6-x32 (2.31-0ubuntu9.7) ...
+Selecting previously unselected package libc6-dev-x32.
+Preparing to unpack .../03-libc6-dev-x32_2.31-0ubuntu9.7_amd64.deb ...
+Unpacking libc6-dev-x32 (2.31-0ubuntu9.7) ...
+Selecting previously unselected package lib32gcc-s1.
+Preparing to unpack .../04-lib32gcc-s1_10.3.0-1ubuntu1~20.04_amd64.deb ...
+Unpacking lib32gcc-s1 (10.3.0-1ubuntu1~20.04) ...
+Selecting previously unselected package libx32gcc-s1.
+Preparing to unpack .../05-libx32gcc-s1_10.3.0-1ubuntu1~20.04_amd64.deb ...
+Unpacking libx32gcc-s1 (10.3.0-1ubuntu1~20.04) ...
+Selecting previously unselected package lib32gomp1.
+Preparing to unpack .../06-lib32gomp1_10.3.0-1ubuntu1~20.04_amd64.deb ...
+Unpacking lib32gomp1 (10.3.0-1ubuntu1~20.04) ...
+Selecting previously unselected package libx32gomp1.
+Preparing to unpack .../07-libx32gomp1_10.3.0-1ubuntu1~20.04_amd64.deb ...
+Unpacking libx32gomp1 (10.3.0-1ubuntu1~20.04) ...
+Selecting previously unselected package lib32itm1.
+Preparing to unpack .../08-lib32itm1_10.3.0-1ubuntu1~20.04_amd64.deb ...
+Unpacking lib32itm1 (10.3.0-1ubuntu1~20.04) ...
+Selecting previously unselected package libx32itm1.
+Preparing to unpack .../09-libx32itm1_10.3.0-1ubuntu1~20.04_amd64.deb ...
+Unpacking libx32itm1 (10.3.0-1ubuntu1~20.04) ...
+Selecting previously unselected package lib32atomic1.
+Preparing to unpack .../10-lib32atomic1_10.3.0-1ubuntu1~20.04_amd64.deb ...
+Unpacking lib32atomic1 (10.3.0-1ubuntu1~20.04) ...
+Selecting previously unselected package libx32atomic1.
+Preparing to unpack .../11-libx32atomic1_10.3.0-1ubuntu1~20.04_amd64.deb ...
+Unpacking libx32atomic1 (10.3.0-1ubuntu1~20.04) ...
+Selecting previously unselected package lib32asan5.
+Preparing to unpack .../12-lib32asan5_9.4.0-1ubuntu1~20.04.1_amd64.deb ...
+Unpacking lib32asan5 (9.4.0-1ubuntu1~20.04.1) ...
+Selecting previously unselected package libx32asan5.
+Preparing to unpack .../13-libx32asan5_9.4.0-1ubuntu1~20.04.1_amd64.deb ...
+Unpacking libx32asan5 (9.4.0-1ubuntu1~20.04.1) ...
+Selecting previously unselected package lib32stdc++6.
+Preparing to unpack .../14-lib32stdc++6_10.3.0-1ubuntu1~20.04_amd64.deb ...
+Unpacking lib32stdc++6 (10.3.0-1ubuntu1~20.04) ...
+Selecting previously unselected package lib32ubsan1.
+Preparing to unpack .../15-lib32ubsan1_10.3.0-1ubuntu1~20.04_amd64.deb ...
+Unpacking lib32ubsan1 (10.3.0-1ubuntu1~20.04) ...
+Selecting previously unselected package libx32stdc++6.
+Preparing to unpack .../16-libx32stdc++6_10.3.0-1ubuntu1~20.04_amd64.deb ...
+Unpacking libx32stdc++6 (10.3.0-1ubuntu1~20.04) ...
+Selecting previously unselected package libx32ubsan1.
+Preparing to unpack .../17-libx32ubsan1_10.3.0-1ubuntu1~20.04_amd64.deb ...
+Unpacking libx32ubsan1 (10.3.0-1ubuntu1~20.04) ...
+Selecting previously unselected package lib32quadmath0.
+Preparing to unpack .../18-lib32quadmath0_10.3.0-1ubuntu1~20.04_amd64.deb ...
+Unpacking lib32quadmath0 (10.3.0-1ubuntu1~20.04) ...
+Selecting previously unselected package libx32quadmath0.
+Preparing to unpack .../19-libx32quadmath0_10.3.0-1ubuntu1~20.04_amd64.deb ...
+Unpacking libx32quadmath0 (10.3.0-1ubuntu1~20.04) ...
+Selecting previously unselected package lib32gcc-9-dev.
+Preparing to unpack .../20-lib32gcc-9-dev_9.4.0-1ubuntu1~20.04.1_amd64.deb ...
+Unpacking lib32gcc-9-dev (9.4.0-1ubuntu1~20.04.1) ...
+Selecting previously unselected package libx32gcc-9-dev.
+Preparing to unpack .../21-libx32gcc-9-dev_9.4.0-1ubuntu1~20.04.1_amd64.deb ...
+Unpacking libx32gcc-9-dev (9.4.0-1ubuntu1~20.04.1) ...
+Selecting previously unselected package gcc-9-multilib.
+Preparing to unpack .../22-gcc-9-multilib_9.4.0-1ubuntu1~20.04.1_amd64.deb ...
+Unpacking gcc-9-multilib (9.4.0-1ubuntu1~20.04.1) ...
+Selecting previously unselected package gcc-multilib.
+Preparing to unpack .../23-gcc-multilib_4%3a9.3.0-1ubuntu2_amd64.deb ...
+Unpacking gcc-multilib (4:9.3.0-1ubuntu2) ...
+Setting up libc6-x32 (2.31-0ubuntu9.7) ...
+Setting up libx32gomp1 (10.3.0-1ubuntu1~20.04) ...
+Setting up libc6-i386 (2.31-0ubuntu9.7) ...
+Setting up libx32quadmath0 (10.3.0-1ubuntu1~20.04) ...
+Setting up lib32atomic1 (10.3.0-1ubuntu1~20.04) ...
+Setting up libx32atomic1 (10.3.0-1ubuntu1~20.04) ...
+Setting up libc6-dev-i386 (2.31-0ubuntu9.7) ...
+Setting up lib32itm1 (10.3.0-1ubuntu1~20.04) ...
+Setting up libx32gcc-s1 (10.3.0-1ubuntu1~20.04) ...
+Setting up libx32itm1 (10.3.0-1ubuntu1~20.04) ...
+Setting up libc6-dev-x32 (2.31-0ubuntu9.7) ...
+Setting up lib32gomp1 (10.3.0-1ubuntu1~20.04) ...
+Setting up lib32gcc-s1 (10.3.0-1ubuntu1~20.04) ...
+Setting up lib32stdc++6 (10.3.0-1ubuntu1~20.04) ...
+Setting up libx32asan5 (9.4.0-1ubuntu1~20.04.1) ...
+Setting up lib32quadmath0 (10.3.0-1ubuntu1~20.04) ...
+Setting up lib32asan5 (9.4.0-1ubuntu1~20.04.1) ...
+Setting up libx32stdc++6 (10.3.0-1ubuntu1~20.04) ...
+Setting up libx32ubsan1 (10.3.0-1ubuntu1~20.04) ...
+Setting up lib32ubsan1 (10.3.0-1ubuntu1~20.04) ...
+Setting up lib32gcc-9-dev (9.4.0-1ubuntu1~20.04.1) ...
+Setting up libx32gcc-9-dev (9.4.0-1ubuntu1~20.04.1) ...
+Setting up gcc-9-multilib (9.4.0-1ubuntu1~20.04.1) ...
+Setting up gcc-multilib (4:9.3.0-1ubuntu2) ...
+Processing triggers for libc-bin (2.31-0ubuntu9.7) ...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  libann0 libcdt5 libcgraph6 libgts-0.7-5 libgts-bin libgvc6 libgvpr2
+  liblab-gamut1 libpathplan4
+Suggested packages:
+  graphviz-doc
+The following NEW packages will be installed:
+  graphviz libann0 libcdt5 libcgraph6 libgts-0.7-5 libgts-bin libgvc6 libgvpr2
+  liblab-gamut1 libpathplan4
+0 upgraded, 10 newly installed, 0 to remove and 0 not upgraded.
+Need to get 1’880 kB of archives.
+After this operation, 9’205 kB of additional disk space will be used.
+Get:1 http://ubuntu.ethz.ch/ubuntu focal/universe amd64 libann0 amd64 1.1.2+doc-7build1 [26.0 kB]
+Get:2 http://ubuntu.ethz.ch/ubuntu focal/universe amd64 libcdt5 amd64 2.42.2-3build2 [18.7 kB]
+Get:3 http://ubuntu.ethz.ch/ubuntu focal/universe amd64 libcgraph6 amd64 2.42.2-3build2 [41.3 kB]
+Get:4 http://ubuntu.ethz.ch/ubuntu focal/universe amd64 libgts-0.7-5 amd64 0.7.6+darcs121130-4 [150 kB]
+Get:5 http://ubuntu.ethz.ch/ubuntu focal/universe amd64 libpathplan4 amd64 2.42.2-3build2 [21.9 kB]
+Get:6 http://ubuntu.ethz.ch/ubuntu focal/universe amd64 libgvc6 amd64 2.42.2-3build2 [647 kB]
+Get:7 http://ubuntu.ethz.ch/ubuntu focal/universe amd64 libgvpr2 amd64 2.42.2-3build2 [167 kB]
+Get:8 http://ubuntu.ethz.ch/ubuntu focal/universe amd64 liblab-gamut1 amd64 2.42.2-3build2 [177 kB]
+Get:9 http://ubuntu.ethz.ch/ubuntu focal/universe amd64 graphviz amd64 2.42.2-3build2 [590 kB]
+Get:10 http://ubuntu.ethz.ch/ubuntu focal/universe amd64 libgts-bin amd64 0.7.6+darcs121130-4 [41.3 kB]
+Fetched 1’880 kB in 0s (6’867 kB/s)
+                                   Selecting previously unselected package libann0.
+(Reading database ... 488982 files and directories currently installed.)
+Preparing to unpack .../0-libann0_1.1.2+doc-7build1_amd64.deb ...
+Unpacking libann0 (1.1.2+doc-7build1) ...
+Selecting previously unselected package libcdt5:amd64.
+Preparing to unpack .../1-libcdt5_2.42.2-3build2_amd64.deb ...
+Unpacking libcdt5:amd64 (2.42.2-3build2) ...
+Selecting previously unselected package libcgraph6:amd64.
+Preparing to unpack .../2-libcgraph6_2.42.2-3build2_amd64.deb ...
+Unpacking libcgraph6:amd64 (2.42.2-3build2) ...
+Selecting previously unselected package libgts-0.7-5:amd64.
+Preparing to unpack .../3-libgts-0.7-5_0.7.6+darcs121130-4_amd64.deb ...
+Unpacking libgts-0.7-5:amd64 (0.7.6+darcs121130-4) ...
+Selecting previously unselected package libpathplan4:amd64.
+Preparing to unpack .../4-libpathplan4_2.42.2-3build2_amd64.deb ...
+Unpacking libpathplan4:amd64 (2.42.2-3build2) ...
+Selecting previously unselected package libgvc6.
+Preparing to unpack .../5-libgvc6_2.42.2-3build2_amd64.deb ...
+Unpacking libgvc6 (2.42.2-3build2) ...
+Selecting previously unselected package libgvpr2:amd64.
+Preparing to unpack .../6-libgvpr2_2.42.2-3build2_amd64.deb ...
+Unpacking libgvpr2:amd64 (2.42.2-3build2) ...
+Selecting previously unselected package liblab-gamut1:amd64.
+Preparing to unpack .../7-liblab-gamut1_2.42.2-3build2_amd64.deb ...
+Unpacking liblab-gamut1:amd64 (2.42.2-3build2) ...
+Selecting previously unselected package graphviz.
+Preparing to unpack .../8-graphviz_2.42.2-3build2_amd64.deb ...
+Unpacking graphviz (2.42.2-3build2) ...
+Selecting previously unselected package libgts-bin.
+Preparing to unpack .../9-libgts-bin_0.7.6+darcs121130-4_amd64.deb ...
+Unpacking libgts-bin (0.7.6+darcs121130-4) ...
+Setting up liblab-gamut1:amd64 (2.42.2-3build2) ...
+Setting up libgts-0.7-5:amd64 (0.7.6+darcs121130-4) ...
+Setting up libpathplan4:amd64 (2.42.2-3build2) ...
+Setting up libann0 (1.1.2+doc-7build1) ...
+Setting up libcdt5:amd64 (2.42.2-3build2) ...
+Setting up libcgraph6:amd64 (2.42.2-3build2) ...
+Setting up libgts-bin (0.7.6+darcs121130-4) ...
+Setting up libgvc6 (2.42.2-3build2) ...
+Setting up libgvpr2:amd64 (2.42.2-3build2) ...
+Setting up graphviz (2.42.2-3build2) ...
+Processing triggers for man-db (2.9.1-1) ...
+Processing triggers for libc-bin (2.31-0ubuntu9.7) ...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+make is already the newest version (4.2.1-1.2).
+make set to manually installed.
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+unzip is already the newest version (6.0-25ubuntu1).
+unzip set to manually installed.
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+g++ is already the newest version (4:9.3.0-1ubuntu2).
+g++ set to manually installed.
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+libtinfo5 is already the newest version (6.2-0ubuntu2).
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following NEW packages will be installed:
+  xvfb
+0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+Need to get 779 kB of archives.
+After this operation, 2’271 kB of additional disk space will be used.
+Get:1 http://ubuntu.ethz.ch/ubuntu focal-updates/universe amd64 xvfb amd64 2:1.20.13-1ubuntu1~20.04.2 [779 kB]
+Fetched 779 kB in 0s (4’395 kB/s)
+                                 Selecting previously unselected package xvfb.
+(Reading database ... 489172 files and directories currently installed.)
+Preparing to unpack .../xvfb_2%3a1.20.13-1ubuntu1~20.04.2_amd64.deb ...
+Unpacking xvfb (2:1.20.13-1ubuntu1~20.04.2) ...
+Setting up xvfb (2:1.20.13-1ubuntu1~20.04.2) ...
+Processing triggers for man-db (2.9.1-1) ...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+git is already the newest version (1:2.25.1-1ubuntu3.4).
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following NEW packages will be installed:
+  libncursesw5
+0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+Need to get 119 kB of archives.
+After this operation, 387 kB of additional disk space will be used.
+Get:1 http://ubuntu.ethz.ch/ubuntu focal/universe amd64 libncursesw5 amd64 6.2-0ubuntu2 [119 kB]
+Fetched 119 kB in 0s (707 kB/s)
+                               Selecting previously unselected package libncursesw5:amd64.
+(Reading database ... 489179 files and directories currently installed.)
+Preparing to unpack .../libncursesw5_6.2-0ubuntu2_amd64.deb ...
+Unpacking libncursesw5:amd64 (6.2-0ubuntu2) ...
+Setting up libncursesw5:amd64 (6.2-0ubuntu2) ...
+Processing triggers for libc-bin (2.31-0ubuntu9.7) ...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+libc6-dev-i386 is already the newest version (2.31-0ubuntu9.7).
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+
+
+
+
+$ sudo ./install_drivers 
+INFO: Installing cable drivers.
+INFO: Script name = ./install_drivers
+INFO: HostName = RS3LAB
+INFO: Current working dir = /tools/Xilinx/Vitis/2022.1/data/xicom/cable_drivers/lin64/install_script/install_drivers
+INFO: Kernel version = 5.4.0-109-generic.
+INFO: Arch = x86_64.
+Successfully installed Digilent Cable Drivers
+--File /etc/udev/rules.d/52-xilinx-ftdi-usb.rules does not exist.
+--File version of /etc/udev/rules.d/52-xilinx-ftdi-usb.rules = 0000.
+--Updating rules file.
+--File /etc/udev/rules.d/52-xilinx-pcusb.rules does not exist.
+--File version of /etc/udev/rules.d/52-xilinx-pcusb.rules = 0000.
+--Updating rules file.
+
+INFO: Digilent Return code = 0
+INFO: Xilinx Return code = 0
+INFO: Xilinx FTDI Return code = 0
+INFO: Return code = 0
+INFO: Driver installation successful.
+CRITICAL WARNING: Cable(s) on the system must be unplugged then plugged back in order for the driver scripts to update the cables.

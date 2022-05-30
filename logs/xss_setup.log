@@ -1,0 +1,233 @@
+#First, setup the card
+
+# Install libs
+$ sudo apt install dmsetup cryptsetup
+
+# source env
+$ source /tools/Xilinx/Vitis/2022.1/settings64.sh
+$ source /opt/xilinx/xrt/setup.sh
+$ export PLATFORM_REPO_PATHS=/opt/xilinx/platforms
+$ export LIBRARY_PATH=/usr/lib/x86_64-linux-gnu
+
+
+# build xss
+$ cd xss/
+$ tar -xzvf xss_2.0.2.tar.gz
+$ cd xss/build
+$ ./build.sh -app dm-crypt
+Args: xss /home/maxime/Documents/SmartSSD/res/xss/xss 2.0.2
+================================================================
+Package   : xss
+XSS Path  : /home/maxime/Documents/SmartSSD/res/xss/xss
+PKGDIR    : /home/maxime/Documents/SmartSSD/res/xss/xss/build/pkgxss
+VERSION   : 2.0.2
+================================================================
+Inluding dm-crypt module...
+Building xss_util
+make: Entering directory '/home/maxime/Documents/SmartSSD/res/xss/xss/user_apps/xss_util'
+rm -rf xss_util
+make: Leaving directory '/home/maxime/Documents/SmartSSD/res/xss/xss/user_apps/xss_util'
+make: Entering directory '/home/maxime/Documents/SmartSSD/res/xss/xss/user_apps/xss_util'
+g++ -I/home/maxime/Documents/SmartSSD/res/xss/xss/kernel_modules/include -I/opt/xilinx/xrt/include/ -Wall -g -I/home/maxime/Documents/SmartSSD/res/xss/xss/build/../../kernel_modules/include ./xss_util.c -o xss_util -L/opt/xilinx/xrt/lib/ -lOpenCL -pthread -lrt -Wno-unused-label -Wno-narrowing -std=c++0x -DVERBOSE -lxrt_core  -luuid  -ldl 
+./xss_util.c: In function ‘int check_cu_conf(const char*, char*)’:
+./xss_util.c:123:25: warning: NULL used in arithmetic [-Wpointer-arith]
+  123 |  if(src_kernel_list[0]==NULL)
+      |                         ^~~~
+./xss_util.c: In function ‘int get_xclbin_info(void*&, ssize_t&, char*&, ssize_t&, xss_dev_cu_info*, int)’:
+./xss_util.c:159:9: warning: unused variable ‘baddr_arr’ [-Wunused-variable]
+  159 |  size_t baddr_arr[MAX_CUS_PER_KERNEL], orig_baddr[MAX_CUS_PER_KERNEL];
+      |         ^~~~~~~~~
+./xss_util.c:159:40: warning: unused variable ‘orig_baddr’ [-Wunused-variable]
+  159 |  size_t baddr_arr[MAX_CUS_PER_KERNEL], orig_baddr[MAX_CUS_PER_KERNEL];
+      |                                        ^~~~~~~~~~
+./xss_util.c: In function ‘int read_config_file()’:
+./xss_util.c:296:26: warning: NULL used in arithmetic [-Wpointer-arith]
+  296 |   if(bdf[line_index][0]==NULL | xclbin[line_index][0]==NULL) {
+      |                          ^~~~
+./xss_util.c:296:56: warning: NULL used in arithmetic [-Wpointer-arith]
+  296 |   if(bdf[line_index][0]==NULL | xclbin[line_index][0]==NULL) {
+      |                                                        ^~~~
+./xss_util.c:296:24: warning: suggest parentheses around comparison in operand of ‘|’ [-Wparentheses]
+  296 |   if(bdf[line_index][0]==NULL | xclbin[line_index][0]==NULL) {
+      |                        ^
+./xss_util.c: In function ‘int initXRT(unsigned int, const char*, void*&, int, int&, unsigned char (&)[16], ssize_t&, char*&, int&)’:
+./xss_util.c:391:25: warning: ‘int xclLockDevice(xclDeviceHandle)’ is deprecated [-Wdeprecated-declarations]
+  391 |  if(xclLockDevice(handle)) {
+      |                         ^
+In file included from /opt/xilinx/xrt/include/xrt.h:795,
+                 from ./xss_util.c:22:
+/opt/xilinx/xrt/include/deprecated/xrt.h:44:1: note: declared here
+   44 | xclLockDevice(xclDeviceHandle handle);
+      | ^~~~~~~~~~~~~
+./xss_util.c:391:25: warning: ‘int xclLockDevice(xclDeviceHandle)’ is deprecated [-Wdeprecated-declarations]
+  391 |  if(xclLockDevice(handle)) {
+      |                         ^
+In file included from /opt/xilinx/xrt/include/xrt.h:795,
+                 from ./xss_util.c:22:
+/opt/xilinx/xrt/include/deprecated/xrt.h:44:1: note: declared here
+   44 | xclLockDevice(xclDeviceHandle handle);
+      | ^~~~~~~~~~~~~
+./xss_util.c: In function ‘int get_peer_dev(char*, char*&)’:
+./xss_util.c:704:18: warning: ‘%s’ directive writing up to 255 bytes into a region of size 10 [-Wformat-overflow=]
+  704 |    sprintf(nvme,"%s",dp->d_name);
+      |                  ^~
+./xss_util.c:704:11: note: ‘sprintf’ output between 1 and 256 bytes into a destination of size 10
+  704 |    sprintf(nvme,"%s",dp->d_name);
+      |    ~~~~~~~^~~~~~~~~~~~~~~~~~~~~~
+make: Leaving directory '/home/maxime/Documents/SmartSSD/res/xss/xss/user_apps/xss_util'
+Packaging for Ubuntu...
+dpkg-deb: building package 'xss' in 'xss-2.0.2-amd64.deb'.
+================================================================
+* Please locate dep for xss in: /home/maxime/Documents/SmartSSD/res/xss/xss/build/pkgxss
+================================================================
+
+
+
+
+
+~/Documents/xss/xss/build$ sudo apt install ./xss-2.0.2-amd64.deb 
+
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+Note, selecting 'xss' instead of './xss-2.0.2-amd64.deb'
+The following packages were automatically installed and are no longer required:
+  linux-headers-5.14.0-1033-oem linux-headers-5.4.0-109
+  linux-headers-5.4.0-109-generic linux-image-5.14.0-1033-oem
+  linux-image-5.4.0-109-generic linux-modules-5.14.0-1033-oem
+  linux-modules-5.4.0-109-generic linux-modules-extra-5.4.0-109-generic
+  linux-oem-5.14-headers-5.14.0-1033
+Use 'sudo apt autoremove' to remove them.
+The following NEW packages will be installed:
+  xss
+0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+Need to get 0 B/229 kB of archives.
+After this operation, 0 B of additional disk space will be used.
+Get:1 /home/maxime/Documents/xss/xss/build/xss-2.0.2-amd64.deb xss all 2.0.2 [229 kB]
+Selecting previously unselected package xss.
+(Reading database ... 579578 files and directories currently installed.)
+Preparing to unpack .../xss/build/xss-2.0.2-amd64.deb ...
+Unpacking xss (2.0.2) ...
+Setting up xss (2.0.2) ...
+
+Creating symlink /var/lib/dkms/xss/2.0.2/source ->
+                 /usr/src/xss-2.0.2
+
+DKMS: add completed.
+
+Kernel preparation unnecessary for this kernel.  Skipping...
+
+Building module:
+cleaning build area...
+source /opt/xilinx/xrt/setup.sh; make...(bad exit status: 2)
+Error! Bad return status for module build on kernel: 5.14.0-1034-oem (x86_64)
+Consult /var/lib/dkms/xss/2.0.2/build/make.log for more information.
+
+Kernel preparation unnecessary for this kernel.  Skipping...
+
+Building module:
+cleaning build area...
+source /opt/xilinx/xrt/setup.sh; make...(bad exit status: 2)
+ERROR: Cannot create report: [Errno 17] File exists: '/var/crash/xss.0.crash'
+Error! Bad return status for module build on kernel: 5.14.0-1034-oem (x86_64)
+Consult /var/lib/dkms/xss/2.0.2/build/make.log for more information.
+modprobe: FATAL: Module xss-driver not found in directory /lib/modules/5.14.0-10
+34-oem
+modprobe: FATAL: Module xcrypt not found in directory /lib/modules/5.14.0-1034-o
+em
+XSS package installed successfully.
+
+
+
+
+
+~/Documents/xss/xss/build$ sudo dpkg -i ./xss-2.0.2-amd64.deb 
+(Reading database ... 579608 files and directories currently installed.)
+Preparing to unpack ./xss-2.0.2-amd64.deb ...
+Error! The module xss 2.0.2 is not currently installed.
+This module is not currently ACTIVE for kernel 5.4.0-109-generic (x86_64).
+
+------------------------------
+Deleting module version: 2.0.2
+completely from the DKMS tree.
+------------------------------
+Done.
+XSS package uninstalled 
+Unpacking xss (2.0.2) over (2.0.2) ...
+Setting up xss (2.0.2) ...
+
+Creating symlink /var/lib/dkms/xss/2.0.2/source ->
+                 /usr/src/xss-2.0.2
+
+DKMS: add completed.
+
+Kernel preparation unnecessary for this kernel.  Skipping...
+
+Building module:
+cleaning build area....
+source /opt/xilinx/xrt/setup.sh; make.....
+Signing module:
+ - /var/lib/dkms/xss/2.0.2/5.4.0-109-generic/x86_64/module/xss-driver.ko
+ - /var/lib/dkms/xss/2.0.2/5.4.0-109-generic/x86_64/module/dm-crypt.ko
+ - /var/lib/dkms/xss/2.0.2/5.4.0-109-generic/x86_64/module/xcrypt.ko
+Secure Boot not enabled on this system.
+cleaning build area....
+
+DKMS: build completed.
+
+xss-driver.ko:
+Running module version sanity check.
+ - Original module
+   - No original module exists within this kernel
+ - Installation
+   - Installing to /lib/modules/5.4.0-109-generic/updates/dkms/
+
+xcrypt.ko:
+Running module version sanity check.
+ - Original module
+   - No original module exists within this kernel
+ - Installation
+   - Installing to /lib/modules/5.4.0-109-generic/updates/dkms/
+
+dm-crypt.ko:
+Running module version sanity check.
+ - Original module
+   - No original module exists within this kernel
+ - Installation
+   - Installing to /lib/modules/5.4.0-109-generic/updates/dkms/
+
+depmod...
+
+DKMS: install completed.
+XSS package installed successfully. 
+
+
+
+
+# list available devices and note FPGA PCI Address : 0000:04:00.1
+$ xss_util list-devices
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Total available SmartSSD devices: 1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+S.No.  FPGA PCI Address  Peer-NVME  XCLBINUUID                            Shell                         FPGA
+1      0000:04:00.1      NA         00000000-0000-0000-0000-000000000000  xilinx_u2_gen3x4_xdma_gc_base_2 NA
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+# Update /etc/xss.conf
+# insert at the end -> 0000:04:00.1 ~/Documents/SmartSSD/fa_aes_xts2_rtl_enc_dec.xclbin
+
+
+# Load xocl driver as ks_mode=1
+$ sudo rmmod xocl
+$ sudo modprobe xocl kds_mode=1
+
+
+
+
+
+
+
+
+
+
