@@ -11,7 +11,7 @@ These guides are based on the official userguides with wrong/outdated informatio
 
 You need to use the GA kernel of an LTS version <= 20.04 of Ubuntu for the setup to work. Here we use the kernel 5.4.0-109-generic on Ubuntu 20.04.
 
-You can find different overviews inside the overview directory, useful scripts for the setup guides inside the scripts directory as well as some documentation in the respective directory.
+You can find different overviews inside the overview directory, useful scripts for the setup guides inside the scripts directory as well as some documentation in the documentation directory.
 
 ## Links
 - SmartSSD
