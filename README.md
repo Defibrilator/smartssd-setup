@@ -13,6 +13,14 @@ You need to use the GA kernel of an LTS version <= 20.04 of Ubuntu for the setup
 
 You can find different overviews inside the overview directory, useful scripts for the setup guides inside the scripts directory as well as some documentation in the documentation directory.
 
+## Cooling 
+
+As this card uses passive cooling and is supposed to be used in a server with an active cooling air flow, the cooling in a computer is not enough.
+
+The cooling was reworked and improved to be below the temperature limit of 70°C. 
+
+Thermal paste was added on the DYI contact, an additional radiator was added on the other side and an additional fan in the box blowing the assembly, see photos in /res/cooling. With the box closed, we were able to pass the card validation tests while remaining in a thermal envelope between 50°C and 60°C.
+
 ## Links
 - SmartSSD
   - [Overview page](https://www.xilinx.com/applications/data-center/computational-storage/smartssd.html)
