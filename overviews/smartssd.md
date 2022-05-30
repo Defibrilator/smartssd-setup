@@ -10,7 +10,7 @@ Combines a Samsung Enterprise SSD and an acceleration-dedicated Xilinx Kintex Ul
 
 The FPGA provides logic elements and CPU cores for acceleration. The SSD controller provides the NAND media interface and management while a private, high-speed peer-to-peer link connects the SSD controller to the FPGA and transfers data between them.
 
-![[Screenshot 2022-03-23 at 18.58.58.png]]
+![Specifications](/res/specs.png)
 
 ## Environment
 - Xilinx Vitis environment : 
