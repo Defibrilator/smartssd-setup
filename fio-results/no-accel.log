@@ -1,0 +1,143 @@
+# Random-Write command :
+$ sudo fio --name=rand-write --ioengine=libaio --iodepth=256 --rw=randwrite --bs=4k --direct=1 --size=100% --numjobs=12 --runtime=60 --filename=/dev/nvme0n1 --group_reporting=1
+rand-write: (g=0): rw=randwrite, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=libaio, iodepth=256
+...
+fio-3.16
+Starting 12 processes
+Jobs: 12 (f=12): [w(12)][100.0%][w=2627MiB/s][w=673k IOPS][eta 00m:00s]
+rand-write: (groupid=0, jobs=12): err= 0: pid=5354: Sat Apr 30 15:38:48 2022
+  write: IOPS=683k, BW=2667MiB/s (2796MB/s)(156GiB/60005msec); 0 zone resets
+    slat (nsec): min=1085, max=1593.6k, avg=1823.24, stdev=1798.94
+    clat (usec): min=97, max=21180, avg=4494.97, stdev=1224.05
+     lat (usec): min=102, max=21182, avg=4496.88, stdev=1224.07
+    clat percentiles (usec):
+     |  1.00th=[  725],  5.00th=[ 2114], 10.00th=[ 3359], 20.00th=[ 4228],
+     | 30.00th=[ 4359], 40.00th=[ 4424], 50.00th=[ 4555], 60.00th=[ 4686],
+     | 70.00th=[ 4752], 80.00th=[ 4948], 90.00th=[ 5276], 95.00th=[ 5866],
+     | 99.00th=[ 8848], 99.50th=[10159], 99.90th=[13435], 99.95th=[14353],
+     | 99.99th=[16319]
+   bw (  MiB/s): min= 2367, max= 2915, per=99.99%, avg=2666.54, stdev= 8.25, samples=1440
+   iops        : min=605974, max=746318, avg=682633.54, stdev=2111.68, samples=1440
+  lat (usec)   : 100=0.01%, 250=0.10%, 500=0.47%, 750=0.48%, 1000=0.56%
+  lat (msec)   : 2=3.04%, 4=9.77%, 10=85.05%, 20=0.54%, 50=0.01%
+  cpu          : usr=7.35%, sys=12.95%, ctx=6186798, majf=0, minf=129
+  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.1%, 32=0.1%, >=64=100.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.1%
+     issued rwts: total=0,40964781,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=256
+
+Run status group 0 (all jobs):
+  WRITE: bw=2667MiB/s (2796MB/s), 2667MiB/s-2667MiB/s (2796MB/s-2796MB/s), io=156GiB (168GB), run=60005-60005msec
+
+Disk stats (read/write):
+  nvme0n1: ios=0/0, merge=0/0, ticks=0/0, in_queue=0, util=0.00%
+
+
+# Random-Read command :
+$ sudo fio --name=rand-read --ioengine=libaio --iodepth=256 --rw=randread --bs=4k --direct=1 --size=100% --numjobs=12 --runtime=60 --filename=/dev/nvme0n1 --group_reporting=1
+rand-read: (g=0): rw=randread, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=libaio, iodepth=256
+...
+fio-3.16
+Starting 12 processes
+Jobs: 12 (f=12): [r(12)][100.0%][r=1904MiB/s][r=487k IOPS][eta 00m:00s]
+rand-read: (groupid=0, jobs=12): err= 0: pid=5449: Sat Apr 30 15:41:54 2022
+  read: IOPS=766k, BW=2991MiB/s (3136MB/s)(175GiB/60007msec)
+    slat (nsec): min=1057, max=3124.6k, avg=1794.59, stdev=1410.39
+    clat (usec): min=100, max=49107, avg=4007.99, stdev=1385.28
+     lat (usec): min=104, max=49108, avg=4009.88, stdev=1385.25
+    clat percentiles (usec):
+     |  1.00th=[  807],  5.00th=[ 1713], 10.00th=[ 2540], 20.00th=[ 3261],
+     | 30.00th=[ 3458], 40.00th=[ 3621], 50.00th=[ 3818], 60.00th=[ 4015],
+     | 70.00th=[ 4293], 80.00th=[ 4752], 90.00th=[ 6194], 95.00th=[ 6652],
+     | 99.00th=[ 7898], 99.50th=[ 8717], 99.90th=[10945], 99.95th=[11731],
+     | 99.99th=[13173]
+   bw (  MiB/s): min= 1822, max= 3405, per=100.00%, avg=2990.45, stdev=40.59, samples=1440
+   iops        : min=466639, max=871898, avg=765554.53, stdev=10390.87, samples=1440
+  lat (usec)   : 250=0.01%, 500=0.19%, 750=0.63%, 1000=0.88%
+  lat (msec)   : 2=4.95%, 4=52.50%, 10=40.65%, 20=0.20%, 50=0.01%
+  cpu          : usr=9.29%, sys=18.40%, ctx=29547884, majf=0, minf=3224
+  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.1%, 32=0.1%, >=64=100.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.1%
+     issued rwts: total=45939967,0,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=256
+
+Run status group 0 (all jobs):
+   READ: bw=2991MiB/s (3136MB/s), 2991MiB/s-2991MiB/s (3136MB/s-3136MB/s), io=175GiB (188GB), run=60007-60007msec
+
+Disk stats (read/write):
+  nvme0n1: ios=0/0, merge=0/0, ticks=0/0, in_queue=0, util=0.00%
+
+
+
+# Seq-Write command :
+$ sudo fio --name=seq-write --ioengine=libaio --iodepth=64 --rw=write --bs=1024k --direct=1 --size=100% --numjobs=12 --runtime=60 --filename=/dev/nvme0n1 --group_reporting=1
+seq-write: (g=0): rw=write, bs=(R) 1024KiB-1024KiB, (W) 1024KiB-1024KiB, (T) 1024KiB-1024KiB, ioengine=libaio, iodepth=64
+...
+fio-3.16
+Starting 12 processes
+Jobs: 12 (f=12): [W(12)][100.0%][w=1453MiB/s][w=1453 IOPS][eta 00m:00s]
+seq-write: (groupid=0, jobs=12): err= 0: pid=5551: Sat Apr 30 15:46:07 2022
+  write: IOPS=1725, BW=1725MiB/s (1809MB/s)(102GiB/60386msec); 0 zone resets
+    slat (usec): min=37, max=526294, avg=6056.06, stdev=16254.21
+    clat (msec): min=8, max=1713, avg=438.94, stdev=288.15
+     lat (msec): min=8, max=1716, avg=445.00, stdev=291.19
+    clat percentiles (msec):
+     |  1.00th=[   39],  5.00th=[   73], 10.00th=[  111], 20.00th=[  169],
+     | 30.00th=[  236], 40.00th=[  288], 50.00th=[  355], 60.00th=[  447],
+     | 70.00th=[  625], 80.00th=[  768], 90.00th=[  869], 95.00th=[  927],
+     | 99.00th=[ 1045], 99.50th=[ 1083], 99.90th=[ 1284], 99.95th=[ 1435],
+     | 99.99th=[ 1586]
+   bw (  MiB/s): min=  126, max= 4189, per=99.89%, avg=1723.36, stdev=84.85, samples=1440
+   iops        : min=  126, max= 4189, avg=1722.93, stdev=84.86, samples=1440
+  lat (msec)   : 10=0.03%, 20=0.05%, 50=2.25%, 100=6.05%, 250=24.67%
+  lat (msec)   : 500=30.57%, 750=14.62%, 1000=19.91%, 2000=1.86%
+  cpu          : usr=1.00%, sys=0.71%, ctx=82666, majf=0, minf=131
+  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.2%, 32=0.4%, >=64=99.3%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.1%, >=64=0.0%
+     issued rwts: total=0,104181,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=64
+
+Run status group 0 (all jobs):
+  WRITE: bw=1725MiB/s (1809MB/s), 1725MiB/s-1725MiB/s (1809MB/s-1809MB/s), io=102GiB (109GB), run=60386-60386msec
+
+Disk stats (read/write):
+  nvme0n1: ios=0/0, merge=0/0, ticks=0/0, in_queue=0, util=0.00%
+
+
+# Seq-Read command :
+$ sudo fio --name=seq-read --ioengine=libaio --iodepth=64 --rw=read --bs=1024k --direct=1 --size=100% --numjobs=12 --runtime=60 --filename=/dev/nvme0n1 --group_reporting=1
+seq-read: (g=0): rw=read, bs=(R) 1024KiB-1024KiB, (W) 1024KiB-1024KiB, (T) 1024KiB-1024KiB, ioengine=libaio, iodepth=64
+...
+fio-3.16
+Starting 12 processes
+Jobs: 12 (f=12): [R(12)][100.0%][r=1951MiB/s][r=1951 IOPS][eta 00m:00s]
+seq-read: (groupid=0, jobs=12): err= 0: pid=5641: Sat Apr 30 15:48:39 2022
+  read: IOPS=2704, BW=2704MiB/s (2835MB/s)(159GiB/60345msec)
+    slat (usec): min=19, max=55897, avg=2919.92, stdev=4625.06
+    clat (msec): min=28, max=1379, avg=280.75, stdev=171.22
+     lat (msec): min=28, max=1396, avg=283.67, stdev=173.39
+    clat percentiles (msec):
+     |  1.00th=[   37],  5.00th=[   59], 10.00th=[   83], 20.00th=[  133],
+     | 30.00th=[  178], 40.00th=[  220], 50.00th=[  257], 60.00th=[  292],
+     | 70.00th=[  334], 80.00th=[  397], 90.00th=[  510], 95.00th=[  617],
+     | 99.00th=[  827], 99.50th=[  919], 99.90th=[ 1070], 99.95th=[ 1116],
+     | 99.99th=[ 1284]
+   bw (  MiB/s): min=  688, max= 6305, per=100.00%, avg=2706.52, stdev=97.00, samples=1440
+   iops        : min=  688, max= 6305, avg=2706.10, stdev=97.02, samples=1440
+  lat (msec)   : 50=3.07%, 100=10.28%, 250=34.69%, 500=41.41%, 750=8.77%
+  lat (msec)   : 1000=1.55%, 2000=0.23%
+  cpu          : usr=0.07%, sys=0.96%, ctx=148473, majf=0, minf=196730
+  IO depths    : 1=0.1%, 2=0.1%, 4=0.1%, 8=0.1%, 16=0.1%, 32=0.2%, >=64=99.5%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.1%, >=64=0.0%
+     issued rwts: total=163175,0,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=64
+
+Run status group 0 (all jobs):
+   READ: bw=2704MiB/s (2835MB/s), 2704MiB/s-2704MiB/s (2835MB/s-2835MB/s), io=159GiB (171GB), run=60345-60345msec
+
+Disk stats (read/write):
+  nvme0n1: ios=0/0, merge=0/0, ticks=0/0, in_queue=0, util=0.00%
