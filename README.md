@@ -7,6 +7,12 @@ The setup flow is :
 2. (Optional) [Setup Vitis IDE](setup-guides/setup_vitis.md)
 3. [Setup XSS](setup-guides/setup_xss.md)
 
+These guides are based on the official userguides with wrong/outdated information updated. [setup_card.md](setup-guides/setup_card.md) is based on the [userguide](setup-guides/ug1382-smartssd-csd.pdf), the [setup_vitis.md](setup-guides/setup_vitis.md) is based on the [Vitis Documentation](https://docs.xilinx.com/r/en-US/ug1393-vitis-application-acceleration/), and [setupd_xss.md](setup-guides/setup_xss.md) is based on the READMEs inside the [xss package](xss/xss_2.0.2.tar.gz).
+
+You need to use the GA kernel of an LTS version <= 20.04 of Ubuntu for the setup to work. Here we use the kernel 5.4.0-109-generic on Ubuntu 20.04.
+
+You can find different overviews inside the overview directory, useful scripts for the setup guides inside the scripts directory as well as some documentation in the respective directory.
+
 ## Links
 - SmartSSD
   - [Overview page](https://www.xilinx.com/applications/data-center/computational-storage/smartssd.html)
