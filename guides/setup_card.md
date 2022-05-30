@@ -14,8 +14,8 @@
 2. Download from https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/alveo/u50.html the Xilinx Runtime for the version 2022.1
 3. Extract everything inside a new SmartSSD/res dir all packages at the same level
 4. Install the packages
-   - `$ sudo sh scripts/install_card_pkgs.sh`
-5. Set the environment
+   - `$ sudo bash scripts/install_card_pkgs.sh`
+5. Set the environment variables
    - `$ source /opt/xilinx/xrt/setup.sh` 
 6. Find the device's <bdf>
    - `$ sudo xbmgmt examine`
