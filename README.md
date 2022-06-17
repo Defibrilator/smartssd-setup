@@ -1,6 +1,6 @@
 # SmartSSD Setup
 
-This repository contains all links, packages and information needed to setup a Xilinx SmartSSD and use the XSS library to run an AES-XTS encryption/decryption kernel on it. 
+This repository contains all links, packages and information needed to setup a Xilinx SmartSSD and use the XSS library to run an AES-XTS encryption/decryption kernel on it. You can find benchmarks done on the card [here](https://github.com/Defibrilator/smartssd-benchmarks).
 
 The setup flow is :
 1. [Setup the Card](setup-guides/setup_card.md)
